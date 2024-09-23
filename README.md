@@ -37,7 +37,7 @@ This project is a REST API built using Spring Boot. It provides a simple and reu
    git clone https://github.com/GabrielKitanovich/APIRestWSpring.git
    ```
 
-2. Configure your database settings in the `application.properties` or `.yml` file:
+2. Configure your database settings in the `application.properties` file:
    ```properties
    spring.datasource.url=jdbc:mysql://localhost:3306/your-database
    spring.datasource.username=your-username
