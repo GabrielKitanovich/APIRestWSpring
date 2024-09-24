@@ -4,6 +4,8 @@ import com.example.persona.repositories.BaseRepository;
 import com.example.persona.entities.Persona;
 import com.example.persona.repositories.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,4 +52,36 @@ public class PersonaServiceImpl extends BaseServiceImpl<Persona, Long> implement
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public Page<Persona> search(String filtro, Pageable pageable) throws Exception {
+        try {
+            Page<Persona> personas = personaRepository.search(filtro, pageable);
+            return personas;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public Page<Persona> searchNativo(String filtro, Pageable pageable) throws Exception {
+        try {
+            Page<Persona> personas = personaRepository.searchNativo(filtro, pageable);
+            return personas;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public Page<Persona> existsByDni(int dni, Pageable pageable) throws Exception {
+        try {
+            Page<Persona> personas = personaRepository.existsByDni(dni, pageable);
+            return personas;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+
 }
