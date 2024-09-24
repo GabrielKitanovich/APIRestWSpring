@@ -77,4 +77,15 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    @Transactional
+    public List<E> saveAll(List<E> entities) throws Exception {
+        try {
+            entities = baseRepository.saveAll(entities);
+            return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

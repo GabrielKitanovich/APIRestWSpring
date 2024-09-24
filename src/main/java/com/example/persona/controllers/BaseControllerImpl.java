@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Long>> implements BaseController<E, Long> {
     @Autowired
@@ -23,7 +24,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
         }
     }
 
-    @Override
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getOne(@PathVariable Long id) {
         try {
@@ -57,6 +58,15 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(servicio.delete(id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Could not delete.\"}");
+        }
+    }
+
+    @PostMapping("/bulk")
+    public ResponseEntity<?> saveAll(@RequestBody List<E> entities) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.saveAll(entities));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Could not save.\"}");
         }
     }
 }
