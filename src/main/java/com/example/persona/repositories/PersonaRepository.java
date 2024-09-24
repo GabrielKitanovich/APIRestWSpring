@@ -21,4 +21,7 @@ public interface PersonaRepository extends BaseRepository<Persona, Long> {
             nativeQuery = true
     )
     List<Persona> searchNativo(String filtro) throws Exception;
+
+    @Query(value = "SELECT * FROM persona WHERE persona.dni = ?1", nativeQuery = true)
+    boolean existsByDni(int dni) throws Exception;
 }
